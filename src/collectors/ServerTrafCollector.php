@@ -39,7 +39,7 @@ class ServerTrafCollector extends AbstractCollector
                     SELECT      device_id, switch_id, zport
                     FROM        device2switchz
                 UNION ALL
-                    SELECT      t.obj_id, s.obj_id AS switch_id, full_port(b.value, t.name) AS zport
+                    SELECT      t.obj_id, s.obj_id AS switch_id, full_port(b.value, REPLACE(t.name, '@', ':')) AS zport
                     FROM        target  t
                     LEFT JOIN   (
                         SELECT obj_id, type_id FROM device WHERE name = 'vCDN'
